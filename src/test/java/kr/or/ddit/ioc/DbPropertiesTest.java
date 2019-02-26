@@ -29,6 +29,7 @@ public class DbPropertiesTest {
 		String username = dbProperties.getUsername();
 		String password = dbProperties.getPassword();
 		String driver = dbProperties.getDriverClassName();
+		
 		logger.debug("url : {}", url);
 		logger.debug("username : {}", username);
 		logger.debug("password : {}", password);
