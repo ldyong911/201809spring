@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="collectionBean" class="kr.or.ddit.ioc.CollectionBean">
+		<property name="list">
+			<list>
+				<value>brown_list</value>
+				<value>cony_list</value>
+				<value>sally_list</value>
+			</list>
+		</property>
+		
+		<property name="set">
+			<set>
+				<value>brown_set</value>
+				<value>cony_set</value>
+				<value>sally_set</value>
+			</set>
+		</property>
+		
+		<property name="map">
+			<map>
+				<entry key="brown" value="brown_map"/>
+				<entry key="cony" value="cony_map"/>
+				<entry key="sally" value="sally_map"/>
+			</map>
+		</property>
+		
+		<property name="properties">
+			<props>
+				<prop key="brown">brown_properties</prop>
+				<prop key="cony">cony_properties</prop>
+				<prop key="sally">sally_properties</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>
