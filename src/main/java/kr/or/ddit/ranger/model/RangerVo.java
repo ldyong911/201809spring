@@ -14,7 +14,8 @@ public class RangerVo {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date regDt;
 	
-
+	private int listIndex;
+	
 	public RangerVo() {
 		
 	}
@@ -44,10 +45,18 @@ public class RangerVo {
 		this.regDt = regDt;
 	}
 
+	public int getListIndex() {
+		return listIndex;
+	}
+
+	public void setListIndex(int listIndex) {
+		this.listIndex = listIndex;
+	}
+
 	@Override
 	public String toString() {
-		return "RangerVo [userId=" + userId + ", userNm=" + userNm + ", birth=" + birth + ", regDt=" + regDt + "]";
+		return "RangerVo [userId=" + userId + ", userNm=" + userNm + ", birth=" + birth + ", regDt=" + regDt
+				+ ", listIndex=" + listIndex + "]";
 	}
-	
 	
 }
