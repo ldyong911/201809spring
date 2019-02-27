@@ -37,9 +37,7 @@ public class CollectionBeanTest {
 		
 		/***When***/
 		List<String> list = collectionBean.getList();
-		for(String str : list) {
-			logger.debug("list : {}", str);
-		}
+		logger.debug("list : {}", list);
 		
 		//set, map, properties 출력
 		Set<String> set = collectionBean.getSet();

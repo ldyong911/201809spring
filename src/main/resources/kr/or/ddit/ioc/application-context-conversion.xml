@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="rangerVo" class="kr.or.ddit.ranger.model.RangerVo">
+		<property name="userId" value="brown"/>
+		
+		<!-- birth 필드는 date 타입, 주입하려고 하는 값은 문자열 -->
+		<property name="birth" value="08-08-2018"/>
+<!-- 		<property name="birth" value="2018-08-08"/> -->
+	</bean>
+	
+	<!-- conversionServiceFactoryBean의 이름은 conversionService로 정의 되어 있다 -->
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="kr.or.ddit.ioc.StringDateConverter">
+					<property name="datePattern" value="MM-dd-yyyy"/>
+				</bean>
+			</set>
+		</property>
+	</bean>
+
+</beans>

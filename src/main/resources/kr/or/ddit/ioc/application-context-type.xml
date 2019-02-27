@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="rangerVo" class="kr.or.ddit.ranger.model.RangerVo">
+		<property name="userId" value="brown"/>
+		
+		<!-- birth 필드는 date 타입, 주입하려고 하는 값은 문자열 -->
+		<property name="birth" value="2018-08-08"/>
+	</bean>
+	
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<list>
+				<bean class="kr.or.ddit.ioc.CustomDateRegistrar"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

@@ -1,6 +1,8 @@
 package kr.or.ddit.ioc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.annotation.Resource;
 
@@ -10,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.ddit.ranger.dao.IRangerDao;
-import kr.or.ddit.ranger.service.IRangerService;
 
 @RunWith(SpringJUnit4ClassRunner.class) //spring에서 제공되는 클래스를 사용
 @ContextConfiguration("classpath:kr/or/ddit/ioc/application-context.xml") //spring 설정파일 위치

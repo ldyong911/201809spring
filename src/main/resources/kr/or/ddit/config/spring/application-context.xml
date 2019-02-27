@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- @Service, @Repository 어노테이션 적용된 클래스를 스캔 -->
+	
+	<context:annotation-config/>
+	
+	<!-- @Controller, @Service, @Repository, @Component를 스캔 -->
+	<!-- 
+		use-defalut-filters 값이 true이면 기본 4가지를 다 스캔하며
+		false이면 필터에 context:include-filter를 통해 어노테이션을 포함시키거나 제외시킬수 있음
+	 -->
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" 
+						  		expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation"
+								expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+
+</beans>
