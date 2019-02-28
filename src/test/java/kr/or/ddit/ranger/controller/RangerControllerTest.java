@@ -46,11 +46,14 @@ public class RangerControllerTest extends WebTestConfig{
 		String viewName = mav.getViewName();
 		Map<String, Object> model = mav.getModel();
 		List<String> rangers = (List<String>) model.get("rangers");
+		List<String> boardGb = (List<String>) model.get("boardGb");
 		
 		/***Then***/
 		assertEquals("ranger/rangerList", viewName);
 		assertNotNull(rangers);
 		assertEquals(5, rangers.size());
+		assertNotNull(boardGb);
+		assertEquals(4, boardGb.size());
 	}
 	
 	/**
@@ -74,9 +77,38 @@ public class RangerControllerTest extends WebTestConfig{
 		ModelMap modelMap =  mav.getModelMap();
 		String ranger = (String) modelMap.get("ranger");
 		
+		List<String> boardGb = (List<String>) modelMap.get("boardGb");
+		
 		/***Then***/
 		assertEquals("ranger/ranger", viewName);
 		assertEquals("sally", ranger);
+		assertNotNull(boardGb);
+		assertEquals(4, boardGb.size());
+	}
+	
+	/**
+	 * Method : testGetRangersMav
+	 * 작성자 : pc11
+	 * 변경이력 :
+	 * @throws Exception
+	 * Method 설명 : ModelAndView객체를 이용한 리턴 테스트
+	 */
+	@Test
+	public void testGetRangersMav() throws Exception{
+		/***Given***/
+		
+		/***When***/
+		MvcResult mvcResult = mockMvc.perform(get("/ranger/getRangersMav")).andReturn();
+		
+		ModelAndView mav = mvcResult.getModelAndView();
+		String viewName = mav.getViewName();
+		
+		Map<String, Object> model = mav.getModel();
+		List<String> rangers = (List<String>) model.get("rangers");
+
+		/***Then***/
+		assertEquals("ranger/rangerList", viewName);
+		assertEquals(5, rangers.size());
 	}
 
 }

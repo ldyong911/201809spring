@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	ranger : ${ranger}
+	rangerVo : ${rVo} <br>
+	ranger : ${ranger} <br>
+	boardGb : ${boardGb} <br>
+	boardGb2 : ${boardGb2} <br>
+	sessionScope : ${sessionScope.boardGb2} <br>
 </body>
 </html>

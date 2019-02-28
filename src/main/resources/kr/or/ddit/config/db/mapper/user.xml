@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+  <!-- 전체 사용자 조회 -->
+  <select id="getAllUser" resultType="UserVo">
+    select *
+      from users
+  </select>
+  
+  <!-- 특정 사용자 조회(userId) selectUser(String userId) query, dao(test), service(test) -->
+  <select id="selectUser" resultType="UserVo" parameterType="String">
+  	select *
+  	  from users
+  	 where userId = #{userId}
+  </select>
+  
+  <!-- 사용자 페이징 조회 -->
+  <select id="selectUserPagingList" resultType="UserVo" parameterType="PageVo">
+  	select *
+      from (select a.*, rownum rn
+      		  from (select users.*
+      		  		  from users
+      		  		 order by userId) a) a
+ 	 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+  </select>
+  
+  <!-- 전체 사용자 수 조회 -->
+  <select id="getUserCnt" resultType="Integer">
+  	select count(*)
+      from users
+  </select>
+  
+  <!-- 사용자 입력 -->
+  <insert id="insertUser" parameterType="UserVo">
+  	insert into users(userId, userNm, alias, addr1, addr2, zipcode, pass, reg_dt, filename, realFilename)
+	values(#{userId}, #{userNm}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{pass}, sysdate, #{filename, jdbcType=VARCHAR}, #{realFilename, jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 사용자 삭제 -->
+  <delete id="deleteUser" parameterType="String">
+  	delete from users
+  	where userId = #{userId}
+  </delete>
+  
+  <!-- 사용자 수정 -->
+  <update id="updateUser" parameterType="UserVo">
+  	update users
+  	   set userNm=#{userNm}, alias=#{alias}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode}, pass=#{pass},
+  	       <!-- mybatis에서 null값인 경우에는 처리를 못해주기때문에 명시적으로 jdbcType으로 처리해야함 -->
+  	       filename=nvl(#{filename, jdbcType=VARCHAR}, filename),
+  	       realFilename=nvl(#{realFilename, jdbcType=VARCHAR}, realFilename)
+  	 where userId=#{userId}
+  </update>
+  
+  <!-- 사용자 비밀번호 암호화 -->
+  <update id="updatePass" parameterType="UserVo">
+  	update users
+  	   set pass = #{pass}
+  	 where userId = #{userId}
+  </update>
+  
+</mapper>

@@ -33,9 +33,4 @@ public class WebTestConfig {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
 }

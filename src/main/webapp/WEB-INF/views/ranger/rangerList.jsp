@@ -26,5 +26,8 @@
 		</tbody>
 	</table>
 	
+	boardGb : ${boardGb} <br>
+	boardGb2 : ${boardGb2} <br>
+	sessionScope : ${sessionScope.boardGb2} <br>
 </body>
 </html>
