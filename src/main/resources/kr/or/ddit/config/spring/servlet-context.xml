@@ -30,10 +30,10 @@
 		1.multipartResolver 등록(id, name은 multipartResolver로 정의되어있음)
 		2.commons-fileupload 디펜던시 추가(pom.xml)
 	 -->
-	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- file 사이즈는 byte 단위이기때문에 value값이 아래와 같음 -->
-		<property name="maxUploadSize" value="26214400"/> <!-- 5MB * 5 -->
 		<property name="maxUploadSizePerFile" value="5242880"/> <!-- 5MB -->
+		<property name="maxUploadSize" value="26214400"/> <!-- 5MB * 5 -->
 	</bean>	 
 
 </beans>
