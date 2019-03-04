@@ -31,21 +31,21 @@ public interface IUserService {
 	 * Method : selectUserPagingList
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param pageVO
+	 * @param pageVo
 	 * @return
 	 * Method 설명 : 사용자 페이지 리스트 조회
 	 */
-	Map<String, Object> selectUserPagingList(PageVo pageVO);
+	Map<String, Object> selectUserPagingList(PageVo pageVo);
 	
 	/**
 	 * Method : insertUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 등록
 	 */
-	int insertUser(UserVo userVO);
+	int insertUser(UserVo userVo);
 	
 	/**
 	 * Method : deleteUser
@@ -61,11 +61,11 @@ public interface IUserService {
 	 * Method : updateUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 수정
 	 */
-	int updateUser(UserVo userVO);
+	int updateUser(UserVo userVo);
 	
 	/**
 	 * Method : encryptPass

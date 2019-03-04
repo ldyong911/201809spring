@@ -44,13 +44,13 @@ public class UserDaoImpl implements IUserDao{
 	 * Method : selectUserPagingList
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param pageVO
+	 * @param pageVo
 	 * @return
 	 * Method 설명 : 사용자 페이징 리스트 조회
 	 */
 	@Override
-	public List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVO) {
-		List<UserVo> userList = sqlSession.selectList("user.selectUserPagingList", pageVO);
+	public List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVo) {
+		List<UserVo> userList = sqlSession.selectList("user.selectUserPagingList", pageVo);
 		
 		return userList;
 	}
@@ -73,12 +73,12 @@ public class UserDaoImpl implements IUserDao{
 	 * Method : insertUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * Method 설명 : 사용자 등록
 	 */
 	@Override
-	public int insertUser(SqlSession sqlSession, UserVo userVO) {
-		int result = sqlSession.insert("user.insertUser", userVO);
+	public int insertUser(SqlSession sqlSession, UserVo userVo) {
+		int result = sqlSession.insert("user.insertUser", userVo);
 		
 		return result;
 	}
@@ -119,13 +119,13 @@ public class UserDaoImpl implements IUserDao{
 	 * 작성자 : pc11
 	 * 변경이력 :
 	 * @param sqlSession
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 비밀번호 암호화
 	 */
 	@Override
-	public int encryptPass(SqlSession sqlSession, UserVo userVO) {
-		int result = sqlSession.update("user.updatePass", userVO);
+	public int encryptPass(SqlSession sqlSession, UserVo userVo) {
+		int result = sqlSession.update("user.updatePass", userVo);
 		
 		return result;
 	}

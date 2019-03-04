@@ -31,11 +31,11 @@ public interface IUserDao {
 	 * Method : selectUserPagingList
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param pageVO
+	 * @param pageVo
 	 * @return
 	 * Method 설명 : 사용자 페이지 리스트 조회
 	 */
-	List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVO);
+	List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVo);
 	
 	/**
 	 * Method : getUserCnt
@@ -50,10 +50,10 @@ public interface IUserDao {
 	 * Method : insertUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * Method 설명 : 사용자 등록
 	 */
-	int insertUser(SqlSession sqlSession, UserVo userVO);
+	int insertUser(SqlSession sqlSession, UserVo userVo);
 	
 	/**
 	 * Method : deleteUser
@@ -70,20 +70,20 @@ public interface IUserDao {
 	 * 작성자 : pc11
 	 * 변경이력 :
 	 * @param sqlSession
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 수정
 	 */
-	int updateUser(SqlSession sqlSession, UserVo userVO);
+	int updateUser(SqlSession sqlSession, UserVo userVo);
 	
 	/**
 	 * Method : encryptPass
 	 * 작성자 : pc11
 	 * 변경이력 :
 	 * @param sqlSession
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 비밀번호 암호화
 	 */
-	int encryptPass(SqlSession sqlSession, UserVo userVO);
+	int encryptPass(SqlSession sqlSession, UserVo userVo);
 }

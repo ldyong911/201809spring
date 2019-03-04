@@ -65,7 +65,7 @@ public class UserServiceImpl implements IUserService {
 	 * Method : selectUserPagingList
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param pageVO
+	 * @param pageVo
 	 * @return
 	 * Method 설명 : 사용자 페이지 리스트 조회
 	 */
@@ -88,7 +88,7 @@ public class UserServiceImpl implements IUserService {
 	 * Method : insertUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 등록
 	 */
@@ -124,7 +124,7 @@ public class UserServiceImpl implements IUserService {
 	 * Method : updateUser
 	 * 작성자 : pc11
 	 * 변경이력 :
-	 * @param userVO
+	 * @param userVo
 	 * @return
 	 * Method 설명 : 사용자 수정
 	 */
