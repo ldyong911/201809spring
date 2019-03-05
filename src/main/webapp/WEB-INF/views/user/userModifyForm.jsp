@@ -102,7 +102,7 @@
 						<label for="pass" class="col-sm-2 control-label">Password</label>
 						<div class="col-sm-10">
 							<input type="password" class="form-control" id="pass" name="pass"
-								placeholder="*******" />
+								placeholder="" />
 						</div>
 					</div>
 
@@ -134,7 +134,7 @@
 			$("#addr1").val("${userVo.addr1}");
 			$("#addr2").val("${userVo.addr2}");
 			$("#zipcode").val("${userVo.zipcode}");
-			$("#pass").val("${userVo.pass}");
+			$("#pass").val();
 			
 			//이미지 값 추가
 			$("img").attr("src", "${cp}/user/profileImg?userId=${userVo.userId}");
@@ -143,17 +143,6 @@
 		$(document).ready(function(){
 			//데이터 입력초기화
 			initData();
-			
-			//아이디 중복시 controller에서 설정한 msg를 체크후 알람창 띄우기
-			//javascript에서 비교
-// 			if("${requestScope.msg}" != ""){
-// 				alert("${requestScope.msg}");
-// 			}
-			
-			//server side에서 비교
-// 			<c:if test="${requestScope.msg != null}">
-// 				alert("${requestScope.msg}");
-// 			</c:if>
 			
 			//우편번호 검색 버튼 클릭 이벤트
 			$("#zipcodeBtn").on("click", function(){
@@ -205,12 +194,7 @@
 				
 				//우편번호(생략)
 				
-				//비밀번호
-				if($("#pass").val().trim() == ""){
-					alert("비밀번호를 입력해주세요!");
-					$("#pass").focus();
-					return false;
-				}
+				//비밀번호(생략)
 				
 				//정상적으로 validation이 완료 --> form 전송
 				$("#frm").submit();

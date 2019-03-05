@@ -2,8 +2,6 @@ package kr.or.ddit.user.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.model.UserVo;
@@ -149,7 +148,8 @@ public class UserController {
 	public String userForm(UserVo userVo,
 						@RequestPart("profile")MultipartFile profile,
 						HttpSession session,
-						Model model) throws Exception{
+						Model model,
+						HttpServletRequest req) throws Exception{
 		
 		UserVo duplicateUserVo =  userService.selectUser(userVo.getUserId());
 		
@@ -163,10 +163,12 @@ public class UserController {
 				realFilename = "d:\\picture\\" + UUID.randomUUID().toString();
 				
 				profile.transferTo(new File(realFilename));
-				
-				userVo.setFilename(filename);
-				userVo.setRealFilename(realFilename);
 			}
+			userVo.setFilename(filename);
+			userVo.setRealFilename(realFilename);
+			
+			//사용자 비밀번호 암호화로직
+			userVo.setPass(KISA_SHA256.encrypt(userVo.getPass()));
 			
 			int insertCnt = 0;
 			try {
@@ -178,7 +180,7 @@ public class UserController {
 			//정상입력(성공)
 			if(insertCnt == 1){
 				session.setAttribute("msg", "정상 등록 되었습니다.");
-				return "redirect:/user/userPagingList";  //contextPath 작업 필요
+				return "redirect:"+ req.getContextPath() +"/user/userPagingList";
 			}else{
 				return "user/userForm"; //검증 필요
 			}
@@ -209,10 +211,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/userModifyForm", method=RequestMethod.POST)
-	public String userModifyForm(UserVo userVo,
-								@RequestPart("profile")MultipartFile profile) throws Exception{
-//		request.setCharacterEncoding("UTF-8");
-		
+	public String userModifyForm(UserVo userVo, 
+								@RequestPart("profile")MultipartFile profile,
+								RedirectAttributes ra,
+								HttpServletRequest req) throws Exception{
 		logger.debug("userVo : {}", userVo);
 		
 		//기존 사진 가져오기
@@ -226,17 +228,44 @@ public class UserController {
 			
 			profile.transferTo(new File(realFilename));
 		}
+		
 		userVo.setFilename(filename);
 		userVo.setRealFilename(realFilename);
 		
+		//비밀번호 수정 요청여부
+		//사용자가 값을 입력하지 않은 경우 => 기존 비밀번호 유지
+		if(userVo.getPass().equals("")){
+			UserVo userVoForPass = userService.selectUser(userVo.getUserId());
+			userVo.setPass(userVoForPass.getPass());
+		}
+		//사용자가 비밀번호를 신규 등록한 경우
+		else{
+			userVo.setPass(KISA_SHA256.encrypt(userVo.getPass())); //패스워드 암호화
+		}
+		
 		//사용자 수정
-		userVo.setPass(KISA_SHA256.encrypt(userVo.getPass())); //패스워드 암호화
-		int updateCnt = userService.updateUser(userVo);
+		int updateCnt = 0;
+		try {
+			updateCnt = userService.updateUser(userVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//정상 수정(성공)
 		if(updateCnt == 1){
-//			response.sendRedirect(request.getContextPath() + "/user?userId=" + userId);
-			return "redirect:/user/user?userId=" + userVo.getUserId();
+			//redirect 파라미터를 보내는 방법
+			// 1.url로 작성
+			//   return "redirect:/user/user?userId=" + userVo.getUserId();
+			// 2.model객체의 속성 : 저장된 속성을 자동을 파라미터 변환
+			//   model.addAttribute("userId", userVo.getUserId());
+			//   return "redirect:/user/user";
+			// 3.RedirectAttributes(ra) 객체를 이용
+			//   ra.addAttribute("userId", userVo.getUserId());
+			//   return "redirect:/user/user";
+			
+			ra.addAttribute("userId", userVo.getUserId());
+			ra.addFlashAttribute("msg", "정상 등록 되었습니다."); //RedirectAttributes에만 있는 기능으로 일시적으로 속성이 존재(한번읽고 삭제됨)
+			return "redirect:" + req.getContextPath() +"/user/user"; //루트path 지정해야함
 		}
 		//정상 수정(실패)
 		else{

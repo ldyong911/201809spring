@@ -97,13 +97,6 @@
 					</div>
 
 					<div class="form-group">
-						<label for="pass" class="col-sm-2 control-label">Password</label>
-						<div class="col-sm-10">
-							<label class="control-label">**********</label>
-						</div>
-					</div>
-
-					<div class="form-group">
 						<label for="reg_dt" class="col-sm-2 control-label">등록일자</label>
 						<div class="col-sm-10">
 							<label class="control-label">
@@ -128,5 +121,11 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
+	<script>
+		<c:if test="${msg != null}">
+			alert("${msg}");
+		</c:if>
+	</script>
 </body>
 </html>
