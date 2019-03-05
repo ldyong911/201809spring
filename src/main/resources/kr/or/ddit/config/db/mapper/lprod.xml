@@ -4,20 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lprod">
   <!-- 전체 lprod 조회 -->
-  <select id="getAllLprod" resultType="LprodVO">
+  <select id="getAllLprod" resultType="LprodVo">
     select *
       from lprod
   </select>
   
   <!-- 특정 prod 조회 -->
-  <select id="selectProd" resultType="ProdVO" parameterType="String">
+  <select id="selectProd" resultType="ProdVo" parameterType="String">
   	select *
   	  from prod
   	 where prod_lgu = #{sss}
   </select>
   
   <!-- lprod 페이지 조회 -->
-  <select id="selectLprodPagingList" resultType="LprodVO" parameterType="PageVO">
+  <select id="selectLprodPagingList" resultType="LprodVo" parameterType="PageVo">
   	select *
       from
          (select a.*, rownum rn

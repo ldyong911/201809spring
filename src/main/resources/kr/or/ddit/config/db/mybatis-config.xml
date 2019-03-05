@@ -10,6 +10,8 @@
   <typeAliases>
   	<typeAlias alias="UserVo" type="kr.or.ddit.user.model.UserVo"/>
   	<typeAlias alias="PageVo" type="kr.or.ddit.util.model.PageVo"/>
+  	<typeAlias alias="LprodVo" type="kr.or.ddit.lprod.model.LprodVo"/>
+  	<typeAlias alias="ProdVo" type="kr.or.ddit.lprod.model.ProdVo"/>
   </typeAliases>
   
   <environments default="development">
@@ -27,5 +29,6 @@
   <!-- mapper 설정 -->
   <mappers>
     <mapper resource="kr/or/ddit/config/db/mapper/user.xml"/>
+    <mapper resource="kr/or/ddit/config/db/mapper/lprod.xml"/>
   </mappers>
 </configuration>
