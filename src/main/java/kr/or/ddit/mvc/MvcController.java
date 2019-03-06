@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -107,8 +109,19 @@ public class MvcController {
 	
 	@RequestMapping("/mvc/textReqJsr303")
 	public String textReqJsr303(@Valid UserVo userVo, BindingResult result){
-		logger.debug("has error : {}", result.hasErrors());
+		logger.debug("has error(jsr303) : {}", result.hasErrors());
 		return "mvc/textView";
+	}
+	
+	@RequestMapping("/mvc/textReqValJsr303")
+	public String textReqValJsr303(@Valid UserVo userVo, BindingResult result){
+		logger.debug("has error(Valjsr303) : {}", result.hasErrors());
+		return "mvc/textView";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.addValidators(new UserVoValidator());
 	}
 	
 }
