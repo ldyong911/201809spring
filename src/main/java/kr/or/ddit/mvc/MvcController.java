@@ -2,9 +2,10 @@ package kr.or.ddit.mvc;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -15,12 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import kr.or.ddit.exception.NoFileException;
 import kr.or.ddit.user.model.UserVo;
@@ -155,5 +157,41 @@ public class MvcController {
 		}
 		
 		return "mvc/textView";
+	}
+	
+	@RequestMapping("/mvc/jsonResponse")
+	public String jsonResponse(Model model){
+		List<String> list = new ArrayList<String>();
+		list.add("brown");
+		list.add("cony");
+		list.add("sally");
+		list.add("james");
+		list.add("moon");
+		
+		model.addAttribute("list", list);
+		
+		return "jsonView"; //bean 객체의 이름과 동일함
+	}
+	
+	@RequestMapping("/mvc/jsonResponseViewObj")
+	public View jsonResponseViewObj(Model model){
+		List<String> list = new ArrayList<String>();
+		list.add("brown");
+		list.add("cony");
+		list.add("sally");
+		list.add("james");
+		list.add("moon");
+		list.add("ronaldo");
+		
+		model.addAttribute("list", list);
+		
+		return new MappingJackson2JsonView(); //이렇게도 가능하지만 사용안함
+	}
+	
+	@RequestMapping("/mvc/profileImgView")
+	public String profileImgView(@RequestParam(name="userId", defaultValue="brown")String userId, Model model){
+		model.addAttribute("userId", userId);
+		
+		return "profileImgView"; //bean 객체의 이름과 동일함
 	}
 }

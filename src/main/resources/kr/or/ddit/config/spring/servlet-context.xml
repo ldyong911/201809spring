@@ -12,8 +12,27 @@
 	<!-- spring에서 처리하지 못하는 요청은 was(servlet-container)에게 위임 -->
 	<mvc:default-servlet-handler/>
 	
-	<!-- jsp를 처리해줄 view resolver -->
+	<!-- 
+		BeanNameViewResolver 설정
+		>> 뷰 이름과 동일한 이름을 갖는 bean 객체를 View 객체로 사용
+	 -->
+	<!-- 
+		html 응답을 생성하는 jsp를 처리해주는 viewResolver와 별개로
+		json 응답을 생성하는 viewResolver를 등록
+		
+		view Resolver의 order : 우선순위(낮을수록 우선순위가 높다 -> 먼저 적용됨)
+	 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+	<bean id="profileImgView" class="kr.or.ddit.view.ProfileImgView"/>
+	
+	<!-- jsp를 처리해줄 view resolver : 후순위 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"/>
 		<property name="prefix" value="/WEB-INF/views/"/> <!-- 접두어 역할 -->
 		<property name="suffix" value=".jsp"/> <!-- 접미어 역할 -->
 	</bean>
