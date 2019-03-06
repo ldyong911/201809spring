@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,4 +104,11 @@ public class MvcController {
 		
 		return "mvc/textView";
 	}
+	
+	@RequestMapping("/mvc/textReqJsr303")
+	public String textReqJsr303(@Valid UserVo userVo, BindingResult result){
+		logger.debug("has error : {}", result.hasErrors());
+		return "mvc/textView";
+	}
+	
 }

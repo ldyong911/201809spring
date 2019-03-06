@@ -3,13 +3,23 @@ package kr.or.ddit.user.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserVo {
+	
+	//에러코드 : 어노테이션 명 --> 메세지 소스에 어노테이션명.필드=에러메세지 등록
+	//@NotBlank //white space 가능
+	@NotEmpty //white space 불가능
 	private String userId; //사용자 아이디
 	private String userNm; //사용자 이름
 	private String alias; //별명
 	private String addr1; //주소
 	private String addr2; //상세주소
 	private String zipcode; //우편번호
+	@Size(min=8)
 	private String pass; //사용자 비밀번호
 	private Date reg_dt; //등록일시
 	private String filename; //업로드파일명
