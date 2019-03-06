@@ -8,12 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>textReq2</h2>
+	<form action="${cp}/mvc/textReq2">
+		<input type="text" name="userId" value="brown"/> <br>
+		<input type="password" name="pass" value="1234"/>
+			<font color="red">${passwordLengthMsg}</font> <br>
+		<input type="submit" value="전송"/>
+	</form>
+
 	<h2>textReq</h2>
 	<form action="${cp}/mvc/textReq">
 		<input type="text" name="userId" value="brown"/>
 			<form:errors path="userVo.userId"/>	<br>
 		<input type="password" name="pass" value="1234"/>
-			<font color="red">${passwordLengthMsg}</font>
 			<form:errors path="userVo.pass"/> <br>
 		<input type="submit" value="전송"/>
 	</form>
