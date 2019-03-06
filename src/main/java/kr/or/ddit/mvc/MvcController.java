@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.exception.NoFileException;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.validator.UserVoValidator;
 
@@ -137,6 +140,20 @@ public class MvcController {
 		if(1==1){ //의미없는 코드로 컴파일러 속이기
 			throw new ArithmeticException();
 		}
+		return "mvc/textView";
+	}
+	
+	@RequestMapping("/mvc/throwNoFileException")
+	public String throwNoFileException() throws NoFileException{
+		Resource resource = new ClassPathResource("kr/or/ddit/config/spring/no-exsits.xml");
+		
+		try {
+			resource.getFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new NoFileException(); //새로운 예외를 발생시킴(우리가 만든 NoFileException)
+		}
+		
 		return "mvc/textView";
 	}
 }
