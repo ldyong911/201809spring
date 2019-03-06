@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -124,4 +125,18 @@ public class MvcController {
 		binder.addValidators(new UserVoValidator());
 	}
 	
+	/**
+	 * Method : throwArithmeticException
+	 * 작성자 : pc11
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : arithmetic 예외 강제 발생
+	 */
+	@RequestMapping("/mvc/throwArith")
+	public String throwArithmeticException(){
+		if(1==1){ //의미없는 코드로 컴파일러 속이기
+			throw new ArithmeticException();
+		}
+		return "mvc/textView";
+	}
 }

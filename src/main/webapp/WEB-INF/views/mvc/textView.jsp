@@ -35,5 +35,7 @@
 			<form:errors path="userVo.pass"/> <br>
 		<input type="submit" value="전송"/>
 	</form>
+	
+	<h2><a href="${cp}/mvc/throwArith">Arithmetic 예외 강제 발생</a></h2>
 </body>
 </html>
