@@ -61,7 +61,6 @@
 			html += "</li>";
 		}else{
 			html += "<li>";
-			//html += "	<a href='${cp}/user/userPagingList?page=1' aria-label='Previous'>";
 			html += "	<a href='javascript:getUserPagingList(1);' aria-label='Previous'>";
 			html += "		<span aria-hidden='true'>&laquo;</span>";
 			html += "	</a>";
@@ -72,12 +71,10 @@
 		if(startPage == lastPageStartPage){
 			for(var i=lastPageStartPage; i<=lastPage; i++){
 				var active = "";
-				<c:set var="active" value=""/>
 				if(i == page){
 					active = "active";
 				}
 				html += "<li class='"+ active +"'>";
-				//html += "	<a href='${cp}/user/userPagingList?page="+ i +"'>"+ i +"</a>";
 				html += "	<a href='javascript:getUserPagingList("+ i +");'>"+ i +"</a>";
 				html += "</li>";
 			}
@@ -88,7 +85,6 @@
 					active = "active";
 				}
 				html += "<li class='"+ active +"'>";
-				//html += "	<a href='${cp}/user/userPagingList?page="+ i +"'>"+ i +"</a>";
 				html += "	<a href='javascript:getUserPagingList("+ i +");'>"+ i +"</a>";
 				html += "</li>";
 			}
@@ -103,7 +99,6 @@
 			html += "</li>";
 		}else{
 			html += "<li>";
-			//html += "	<a href='${cp}/user/userPagingList?page="+ lastPage +"' aria-label='Next'>";
 			html += "	<a href='javascript:getUserPagingList("+ lastPage +");' aria-label='Next'>";
 			html += "		<span aria-hidden='true'>&raquo;</span>";
 			html += "	</a>";
