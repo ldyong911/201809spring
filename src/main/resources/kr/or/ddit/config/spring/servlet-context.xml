@@ -30,9 +30,22 @@
 	
 	<bean id="profileImgView" class="kr.or.ddit.view.ProfileImgView"/>
 	
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="1"/>
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:kr/or/ddit/config/tiles/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- jsp를 처리해줄 view resolver : 후순위 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1"/>
+		<property name="order" value="2"/>
 		<property name="prefix" value="/WEB-INF/views/"/> <!-- 접두어 역할 -->
 		<property name="suffix" value=".jsp"/> <!-- 접미어 역할 -->
 	</bean>
