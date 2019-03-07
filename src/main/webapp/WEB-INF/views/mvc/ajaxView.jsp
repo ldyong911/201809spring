@@ -68,7 +68,7 @@
 			//data : $("#frm").serialize(),	//보낼 파라미터가 많을때 사용하는 유용한 방법
 			data : JSON.stringify(data), //JSON.stringify(데이터)는 해당 데이터를 문자열로 변환해줌
 			dataType : "json",	//server로부터 받으려는 데이터타입
-			contentType : "application/json; charsert=utf-8", //client가 전송하는 데이터타입 
+			contentType : "application/json; charset=utf-8", //client가 전송하는 데이터타입 
 			success : function(data){
 				/*
 				var arr = data;
