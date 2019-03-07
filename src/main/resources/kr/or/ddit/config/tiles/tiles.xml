@@ -13,6 +13,7 @@
 		<put-attribute name="content" value="/WEB-INF/views/template/helloTiles.jsp"/>
 	</definition>
 	
+	<!-- user module tiles 적용 -->
 	<definition name="layout" template="/WEB-INF/views/module/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/module/header.jsp"/>
 		<put-attribute name="left" value="/WEB-INF/views/module/left.jsp"/>
