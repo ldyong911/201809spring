@@ -50,7 +50,8 @@ public class UserController {
 		List<UserVo> userList = userService.getAllUser();
 		model.addAttribute("userList", userList);
 		
-		return "user/userAllList";
+//		return "user/userAllList";
+		return "userAllListTiles"; //tiles 설정파일의 definition 이름(name)과 동일함
 	}
 	
 	/**
@@ -84,7 +85,8 @@ public class UserController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		
-		return "user/userPagingList";
+//		return "user/userPagingList";
+		return "userPagingListTiles"; //tiles 설정파일의 definition 이름(name)과 동일함
 	}
 	
 	/**
@@ -101,7 +103,8 @@ public class UserController {
 		UserVo userVo = userService.selectUser(userId);
 		model.addAttribute("userVo", userVo);
 		
-		return "user/user";
+//		return "user/user";
+		return "userTiles"; //tiles 설정파일의 definition 이름(name)과 동일함
 	}
 	
 	@RequestMapping("/profileImg")
