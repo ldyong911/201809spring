@@ -31,4 +31,8 @@
 	<definition name="userPagingListTiles" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/views/user/userPagingListContent.jsp"/>
 	</definition>
+	
+	<definition name="userPagingListAjaxTiles" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/user/userPagingListContentAjax.jsp"/>
+	</definition>
 </tiles-definitions>

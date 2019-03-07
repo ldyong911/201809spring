@@ -90,6 +90,77 @@ public class UserController {
 	}
 	
 	/**
+	 * Method : userPagingListAjaxView
+	 * 작성자 : pc11
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 사용자 페이지 리스트 뷰
+	 */
+	@RequestMapping("/userPagingListAjaxView")
+	public String userPagingListAjaxView(){
+		return "userPagingListAjaxTiles"; //tiles 설정파일의 definition 이름(name)과 동일함
+	}
+	
+	/**
+	 * Method : userPagingListAjax
+	 * 작성자 : pc11
+	 * 변경이력 :
+	 * @param pageVo
+	 * @param model
+	 * @return
+	 * Method 설명 : 사용자 페이지 리스트 ajax 요청 처리
+	 */
+	@RequestMapping("/userPagingListAjax")
+	public String userPagingListAjax(PageVo pageVo, Model model){
+		int page = pageVo.getPage();
+		int pageSize = pageVo.getPageSize();
+		
+		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
+		List<UserVo> userList = (List<UserVo>) resultMap.get("userList");
+		
+		int userCnt = (int) resultMap.get("userCnt");
+		int lastPage = userCnt/pageSize + (userCnt%pageSize > 0 ? 1 : 0);
+		int lastPageStartPage = ((lastPage - 1) / 10) * 10 + 1;
+		int startPage = ((page - 1) / 10) * 10 + 1; 
+		int endPage = startPage + 10 - 1;
+		
+		model.addAttribute("userList", userList);
+		model.addAttribute("page", page);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("lastPageStartPage", lastPageStartPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
+		return "jsonView"; //bean 객체의 이름과 동일함
+	}
+	
+	@RequestMapping("/userPagingListAjaxHtml")
+	public String userPagingListAjaxHtml(PageVo pageVo, Model model){
+		int page = pageVo.getPage();
+		int pageSize = pageVo.getPageSize();
+		
+		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
+		List<UserVo> userList = (List<UserVo>) resultMap.get("userList");
+		
+		int userCnt = (int) resultMap.get("userCnt");
+		int lastPage = userCnt/pageSize + (userCnt%pageSize > 0 ? 1 : 0);
+		int lastPageStartPage = ((lastPage - 1) / 10) * 10 + 1;
+		int startPage = ((page - 1) / 10) * 10 + 1; 
+		int endPage = startPage + 10 - 1;
+		
+		model.addAttribute("userList", userList);
+		model.addAttribute("page", page);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("lastPageStartPage", lastPageStartPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
+		return "user/userPagingListAjaxHtml";
+	}
+	
+	/**
 	 * Method : user
 	 * 작성자 : pc11
 	 * 변경이력 :
