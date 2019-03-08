@@ -6,11 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddit.db.mybatis.MybatisSqlSessionFactory;
 import kr.or.ddit.lprod.dao.ILprodDao;
 import kr.or.ddit.lprod.model.LprodVo;
 import kr.or.ddit.lprod.model.ProdVo;
@@ -18,15 +15,9 @@ import kr.or.ddit.util.model.PageVo;
 
 @Service("lprodService")
 public class LprodServiceImpl implements ILprodService{
-	private SqlSessionFactory sqlSessionFactory;
-	private SqlSession sqlSession;
 	
 	@Resource(name="lprodDao")
 	private ILprodDao lprodDao;
-	
-	public LprodServiceImpl() {
-		sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-	}
 	
 	/**
 	 * Method : getAllLprod
@@ -37,10 +28,7 @@ public class LprodServiceImpl implements ILprodService{
 	 */
 	@Override
 	public List<LprodVo> getAllLprod() {
-		sqlSession = sqlSessionFactory.openSession();
-		List<LprodVo> lprodList = lprodDao.getAllLprod(sqlSession);
-		sqlSession.close();
-		
+		List<LprodVo> lprodList = lprodDao.getAllLprod();
 		return lprodList;
 	}
 
@@ -54,10 +42,7 @@ public class LprodServiceImpl implements ILprodService{
 	 */
 	@Override
 	public List<ProdVo> selectProd(String lprod_gu) {
-		sqlSession = sqlSessionFactory.openSession();
-		List<ProdVo> prodList = lprodDao.selectProd(sqlSession, lprod_gu);
-		sqlSession.close();
-		
+		List<ProdVo> prodList = lprodDao.selectProd(lprod_gu);
 		return prodList;
 	}
 
@@ -71,13 +56,10 @@ public class LprodServiceImpl implements ILprodService{
 	 */
 	@Override
 	public Map<String, Object> selectLprodPagingList(PageVo pageVo) {
-		sqlSession = sqlSessionFactory.openSession();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap.put("lprodList", lprodDao.selectLprodPagingList(sqlSession, pageVo));
-		resultMap.put("lprodCnt", lprodDao.getLprodCnt(sqlSession));
-		
-		sqlSession.close();
+		resultMap.put("lprodList", lprodDao.selectLprodPagingList(pageVo));
+		resultMap.put("lprodCnt", lprodDao.getLprodCnt());
 		
 		return resultMap;
 	}

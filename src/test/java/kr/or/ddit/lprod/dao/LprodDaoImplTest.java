@@ -7,15 +7,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.or.ddit.db.mybatis.MybatisSqlSessionFactory;
 import kr.or.ddit.lprod.model.LprodVo;
 import kr.or.ddit.lprod.model.ProdVo;
 import kr.or.ddit.test.LogicTestConfig;
@@ -25,20 +21,11 @@ public class LprodDaoImplTest extends LogicTestConfig{
 	
 	private Logger logger = LoggerFactory.getLogger(LprodDaoImplTest.class);
 	
-	private SqlSession sqlSession;
-	
 	@Resource(name="lprodDao")
 	private ILprodDao lprodDao;
 	
 	@Before
 	public void setup(){
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
-	}
-	
-	@After
-	public void tearDown(){
-		sqlSession.close();
 	}
 
 	/**
@@ -52,7 +39,7 @@ public class LprodDaoImplTest extends LogicTestConfig{
 		/***Given***/
 		
 		/***When***/
-		List<LprodVo> lprodList = lprodDao.getAllLprod(sqlSession);
+		List<LprodVo> lprodList = lprodDao.getAllLprod();
 		
 		/***Then***/
 		assertNotNull(lprodList);
@@ -71,7 +58,7 @@ public class LprodDaoImplTest extends LogicTestConfig{
 		String lprod_gu = "P101";
 		
 		/***When***/
-		List<ProdVo> prodList = lprodDao.selectProd(sqlSession, lprod_gu);
+		List<ProdVo> prodList = lprodDao.selectProd(lprod_gu);
 		
 		/***Then***/
 		assertNotNull(prodList);
@@ -91,7 +78,7 @@ public class LprodDaoImplTest extends LogicTestConfig{
 		PageVo pageVo = new PageVo(1, 10);
 		
 		/***When***/
-		List<LprodVo> lprodList = lprodDao.selectLprodPagingList(sqlSession, pageVo);
+		List<LprodVo> lprodList = lprodDao.selectLprodPagingList(pageVo);
 		for(LprodVo vo : lprodList){
 			logger.debug("lprodVo : {}", vo);
 		}
@@ -112,7 +99,7 @@ public class LprodDaoImplTest extends LogicTestConfig{
 		/***Given***/
 		
 		/***When***/
-		int lprodCnt = lprodDao.getLprodCnt(sqlSession);
+		int lprodCnt = lprodDao.getLprodCnt();
 
 		/***Then***/
 		assertEquals(9, lprodCnt);
