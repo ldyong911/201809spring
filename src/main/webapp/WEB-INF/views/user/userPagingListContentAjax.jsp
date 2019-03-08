@@ -133,6 +133,28 @@
 				var htmlArr = data.split("=====seperator====="); //구분자로 잘라서 배열에 넣음
 				$("#userListTbody").html(htmlArr[0]);
 				$("#pagination").html(htmlArr[1]);
+				
+				
+				
+				//ajax를 통한 html 생성시 이벤트 핸들러 등록 방법
+				//1.html이 ajax 호출에 의해 정상적으로 생성된 이후
+				//  클릭 이벤트 핸들러를 등록
+				//  (success -> 사용자 html이 생성된 이후에 등록)
+				/*
+				$(".userTr").on("click", function(){
+					console.log("userTr click");
+					//클릭한 userTr태그의 userId 값을 출력
+					//console.log($(this).children()[1].innerText);
+					//console.log("data-userid : " + $(this).data("userid"));
+					
+					var userId = $(this).data("userid");
+					$("#userId").val(userId);
+					
+					//$("#frm").attr("action", "/user"); //속성바꿀때 사용
+					$("#frm").submit();
+					
+				});
+				*/
 			}
 		});
 	}
@@ -153,7 +175,12 @@
 			<%session.removeAttribute("msg");%> //session영역 속성이 존재하기때문에 알람창을 한번 띄운후 삭제
 		</c:if>
 		
-		$(".userTr").on("click", function(){
+		//ajax를 통한 html 생성시 이벤트 핸들러 등록 방법
+		//2.이벤트 핸들러 대상을 변경 (.userTr -> #userListTbody)
+		//  동적으로 생성되는 html을 감싸는 영역에 이벤트를 등록
+		//  단, on 옵션에서 감싸는 영역 안에 처리되어야할 selector를 명시
+		//  $(".userTr").on("click", function(){}); -> $("#userListTbody").on("click", ".userTr", function(){});
+		$("#userListTbody").on("click", ".userTr", function(){
 			console.log("userTr click");
 			//클릭한 userTr태그의 userId 값을 출력
 			//console.log($(this).children()[1].innerText);
@@ -166,7 +193,6 @@
 			$("#frm").submit();
 			
 		});
-		
 	});
 </script>
 
