@@ -14,7 +14,10 @@
  	<!-- parent spring container : 로직을 다른 자식 컨테이너에서 재사용 가능 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml</param-value>
+		<param-value>
+			classpath:kr/or/ddit/config/spring/application-context.xml
+			classpath:kr/or/ddit/config/spring/context-aop.xml
+		</param-value>
 	</context-param>
 
 	<!-- Bootstraps the root web application context before servlet initialization -->

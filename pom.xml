@@ -177,7 +177,14 @@
 	    <artifactId>tiles-extras</artifactId>
 	    <version>3.0.8</version>
 	</dependency>
-
+	
+	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.9.2</version>
+	</dependency>
+	
   </dependencies>
   
 </project>

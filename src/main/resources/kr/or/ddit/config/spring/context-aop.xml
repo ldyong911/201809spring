@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="loggingAdvice" class="kr.or.ddit.aop.LoggingAdvice"/>
+	
+	<aop:config>
+		<!-- 리턴타입 상관없이 kr.or.ddit 하위 패키지의 service패키지에 해당하는 하위 모든 클래스에 대해 인자 상관없이 -->
+		<aop:pointcut id="target" expression="execution(* kr.or.ddit..service.*.*(..))"/>
+		
+		<aop:aspect ref="loggingAdvice">
+			<aop:before method="beforeMethod" pointcut-ref="target"/>
+			<aop:after method="afterMethod" pointcut-ref="target"/>
+			<aop:around method="aroundMethod" pointcut-ref="target"/>
+		</aop:aspect>
+	</aop:config>
+		
+</beans>
