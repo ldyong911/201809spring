@@ -30,5 +30,6 @@
   <mappers>
     <mapper resource="kr/or/ddit/config/db/mapper/user.xml"/>
     <mapper resource="kr/or/ddit/config/db/mapper/lprod.xml"/>
+    <mapper resource="kr/or/ddit/config/db/mapper/ranger.xml"/>
   </mappers>
 </configuration>
