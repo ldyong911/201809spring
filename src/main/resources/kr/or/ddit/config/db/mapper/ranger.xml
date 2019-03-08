@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ranger">
+	<!-- 전체 레인저스 조회 -->
+	<select id="getRangersDb" resultType="map">
+		select *
+		  from ranger
+	</select>
+	
+	<!-- 아이디로 레인저 조회 -->
+	<select id="getRanger" parameterType="String" resultType="map">
+		select *
+		  from ranger
+		 where id = #{id}
+	</select>
+	
+	<!-- 레인저 등록 -->
+	<insert id="insertRanger" parameterType="map">
+		insert into ranger values(#{id}, #{name})
+	</insert>
+	
+	<!-- 레인저 삭제 -->
+	<delete id="deleteRanger" parameterType="String">
+		delete from ranger
+		where id = #{id}
+	</delete>
+	
+	<!-- 레인저 소속 삭제 -->
+	<delete id="deleteRangerDept" parameterType="String">
+		delete from rangerDept
+		where id = #{id}
+	</delete>
+</mapper>
