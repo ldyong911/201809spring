@@ -19,7 +19,6 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED"/>
-			<tx:method name="" rollback-for=""/>
 		</tx:attributes>
 	</tx:advice>
 	
