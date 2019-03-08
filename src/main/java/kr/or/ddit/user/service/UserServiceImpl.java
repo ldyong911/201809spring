@@ -6,11 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddit.db.mybatis.MybatisSqlSessionFactory;
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.dao.IUserDao;
 import kr.or.ddit.user.model.UserVo;
@@ -18,15 +15,9 @@ import kr.or.ddit.util.model.PageVo;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
-	private SqlSessionFactory sqlSessionFactory;
-	private SqlSession sqlSession;
 	
 	@Resource(name="userDao")
 	private IUserDao userDao;
-	
-	public UserServiceImpl(){
-		sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-	}
 	
 	/**
 	 * Method : getAllUser
@@ -37,10 +28,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public List<UserVo> getAllUser() {
-		sqlSession = sqlSessionFactory.openSession();
-		List<UserVo> userList = userDao.getAllUser(sqlSession);
-		sqlSession.close();
-		
+		List<UserVo> userList = userDao.getAllUser();
 		return userList;
 	}
 
@@ -54,10 +42,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public UserVo selectUser(String userId) {
-		sqlSession = sqlSessionFactory.openSession();
-		UserVo userVO = userDao.selectUser(sqlSession, userId);
-		sqlSession.close();
-		
+		UserVo userVO = userDao.selectUser(userId);
 		return userVO;
 	}
 
@@ -71,15 +56,11 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public Map<String, Object> selectUserPagingList(PageVo pageVo) {
-		sqlSession = sqlSessionFactory.openSession();
-		
 		//결과값을 두개 담아서 return 하기위해 Map 객체 사용
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap.put("userList", userDao.selectUserPagingList(sqlSession, pageVo));
-		resultMap.put("userCnt", userDao.getUserCnt(sqlSession));
-		
-		sqlSession.close();
+		resultMap.put("userList", userDao.selectUserPagingList(pageVo));
+		resultMap.put("userCnt", userDao.getUserCnt());
 		
 		return resultMap;
 	}
@@ -94,11 +75,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int insertUser(UserVo userVo) {
-		sqlSession = sqlSessionFactory.openSession();
-		int result = userDao.insertUser(sqlSession, userVo);
-		sqlSession.commit(); //트랜잭션이 발생되는 쿼리이기때문에 commit해줘야함
-		sqlSession.close();
-		
+		int result = userDao.insertUser(userVo);
 		return result;
 	}
 
@@ -112,11 +89,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int deleteUser(String userId) {
-		sqlSession = sqlSessionFactory.openSession();
-		int result = userDao.deleteUser(sqlSession, userId);
-		sqlSession.commit(); //트랜잭션이 발생되는 쿼리이기때문에 commit해줘야함
-		sqlSession.close();
-		
+		int result = userDao.deleteUser(userId);
 		return result;
 	}
 
@@ -130,11 +103,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int updateUser(UserVo userVo) {
-		sqlSession = sqlSessionFactory.openSession();
-		int result = userDao.updateUser(sqlSession, userVo);
-		sqlSession.commit(); //트랜잭션이 발생되는 쿼리이기때문에 commit해줘야함
-		sqlSession.close();
-		
+		int result = userDao.updateUser(userVo);
 		return result;
 	}
 
@@ -147,9 +116,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int encryptPass() {
-		sqlSession = sqlSessionFactory.openSession();
-		
-		List<UserVo> userList = userDao.getAllUser(sqlSession);
+		List<UserVo> userList = userDao.getAllUser();
 		
 		int result = 0;
 		for(UserVo userVo : userList){
@@ -157,11 +124,8 @@ public class UserServiceImpl implements IUserService {
 			String encryptPass = KISA_SHA256.encrypt(pass);
 			userVo.setPass(encryptPass);
 			
-			result += userDao.encryptPass(sqlSession, userVo);
+			result += userDao.encryptPass(userVo);
 		}
-		
-		sqlSession.commit(); //트랜잭션이 발생되는 쿼리이기때문에 commit해줘야함
-		sqlSession.close();
 		
 		return result;
 	}

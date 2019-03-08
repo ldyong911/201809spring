@@ -8,21 +8,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.or.ddit.db.mybatis.MybatisSqlSessionFactory;
 import kr.or.ddit.test.LogicTestConfig;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.util.model.PageVo;
 
 public class UserServiceImplTest extends LogicTestConfig{
-	private SqlSession sqlSession;
 	
 	@Resource(name="userService")
 	private IUserService userService;
@@ -31,15 +26,7 @@ public class UserServiceImplTest extends LogicTestConfig{
 	
 	@Before
 	public void setup(){
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
-		
 		userService.deleteUser("test1");
-	}
-	
-	@After
-	public void tearDown(){
-		sqlSession.close();
 	}
 
 	@Test

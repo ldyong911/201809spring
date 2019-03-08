@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <!-- db연결 설정 -->
-  <properties resource="kr/or/ddit/config/db/db.properties"/>
+<!--   <properties resource="kr/or/ddit/config/db/db.properties"/> -->
   
   <!-- vo 별칭 부여 -->
   <typeAliases>
@@ -14,17 +14,17 @@
   	<typeAlias alias="ProdVo" type="kr.or.ddit.lprod.model.ProdVo"/>
   </typeAliases>
   
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-      </dataSource>
-    </environment>
-  </environments>
+<!--   <environments default="development"> -->
+<!--     <environment id="development"> -->
+<!--       <transactionManager type="JDBC"/> -->
+<!--       <dataSource type="POOLED"> -->
+<!--         <property name="driver" value="${jdbc.driver}"/> -->
+<!--         <property name="url" value="${jdbc.url}"/> -->
+<!--         <property name="username" value="${jdbc.username}"/> -->
+<!--         <property name="password" value="${jdbc.password}"/> -->
+<!--       </dataSource> -->
+<!--     </environment> -->
+<!--   </environments> -->
   
   <!-- mapper 설정 -->
   <mappers>
