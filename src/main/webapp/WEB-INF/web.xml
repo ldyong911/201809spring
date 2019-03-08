@@ -17,6 +17,8 @@
 		<param-value>
 			classpath:kr/or/ddit/config/spring/application-context.xml
 			classpath:kr/or/ddit/config/spring/context-aop.xml
+			classpath:kr/or/ddit/config/spring/context-datasource.xml
+			classpath:kr/or/ddit/config/spring/context-transaction.xml
 		</param-value>
 	</context-param>
 
