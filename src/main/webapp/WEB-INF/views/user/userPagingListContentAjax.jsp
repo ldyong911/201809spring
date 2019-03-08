@@ -134,8 +134,6 @@
 				$("#userListTbody").html(htmlArr[0]);
 				$("#pagination").html(htmlArr[1]);
 				
-				
-				
 				//ajax를 통한 html 생성시 이벤트 핸들러 등록 방법
 				//1.html이 ajax 호출에 의해 정상적으로 생성된 이후
 				//  클릭 이벤트 핸들러를 등록
@@ -169,7 +167,7 @@
 		//json타입을 html형식으로 받아서 ajax로 처리
 		getUserPagingListHtml(1);
 		
-		//msg 속서이 존재하면 alert, 존재하지 않으면 넘어가기
+		//msg 속성이 존재하면 alert, 존재하지 않으면 넘어가기
 		<c:if test="${msg != null}">
 			alert("${msg}");
 			<%session.removeAttribute("msg");%> //session영역 속성이 존재하기때문에 알람창을 한번 띄운후 삭제
