@@ -8,9 +8,24 @@
 	</appender>
 
 	<logger name="kr.or.ddit" level="DEBUG"/>
+	
+	<!-- 불필요한 로그 제외시키기(error 일때만 표시) -->
+	<logger name="org.apache.commons.digester.Digester" level="error"/> <!-- 불필요한 로그 제외시키기(tiles관한 로그) -->
+	<logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="error"/>
+	<logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="error"/>
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="error"/>
+	<logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="error"/>
+	<logger name="org.springframework.beans.factory.xml.PluggableSchemaResolver" level="error"/>
+	<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="error"/>
+	<logger name="org.apache.ibatis.datasource.pooled.PooledDataSource" level="error"/>
+	<logger name="org.springframework.web.context.support.StandardServletEnvironment" level="error"/>
+	<logger name="org.springframework.beans.factory.xml.PluggableSchemaResolver" level="error"/>
+	<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="error"/>
+	<logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="error"/>
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="error"/>
     
 	<root level="DEBUG">
-   		<appender-ref ref="console" />
+   		<appender-ref ref="console"/>
   	</root>
   	 
 </configuration>
