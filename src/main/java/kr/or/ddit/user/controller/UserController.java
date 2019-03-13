@@ -254,7 +254,7 @@ public class UserController {
 			//정상입력(성공)
 			if(insertCnt == 1){
 				session.setAttribute("msg", "정상 등록 되었습니다.");
-				return "redirect:"+ req.getContextPath() +"/user/userPagingList";
+				return "redirect:" + "/user/userPagingList"; //루트path 지정해야하지만 contextPath에 관한 리스너 등록시 자동으로 붙여진다!!!
 			}else{
 				return "user/userForm"; //검증 필요
 			}
@@ -339,7 +339,7 @@ public class UserController {
 			
 			ra.addAttribute("userId", userVo.getUserId());
 			ra.addFlashAttribute("msg", "정상 등록 되었습니다."); //RedirectAttributes에만 있는 기능으로 일시적으로 속성이 존재(한번읽고 삭제됨)
-			return "redirect:" + req.getContextPath() +"/user/user"; //루트path 지정해야함
+			return "redirect:" + "/user/user"; //루트path 지정해야하지만 contextPath에 관한 리스너 등록시 자동으로 붙여진다!!!
 		}
 		//정상 수정(실패)
 		else{
