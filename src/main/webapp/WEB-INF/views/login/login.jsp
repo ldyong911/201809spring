@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="/css/signin.css" rel="stylesheet">
+<link href="${cp}/css/signin.css" rel="stylesheet">
 
 </head>
 <body>
@@ -31,7 +31,7 @@
   	 --%>
 
 	<div class="container">
-		<form class="form-signin" action="/login" method="post">
+		<form class="form-signin" action="${cp}/login" method="post">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputEmail" class="sr-only">Email address</label>
 			<input name="userId" type="text" id="userId" class="form-control" placeholder="Email address" required autofocus>
@@ -53,8 +53,7 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/cookieUtil.js"></script>
-<script src="<%=request.getContextPath()%>/js/js.cookie.js"></script>
+<script src="${cp}/js/js.cookie.js"></script>
 <!-- cookie 관련된 기능 처리에 필요 -->
 <script>
 	$(document).ready(function() {
