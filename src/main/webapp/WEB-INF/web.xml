@@ -69,4 +69,8 @@
 		<error-code>500</error-code>
 		<location>/error/500/500.html</location>
 	</error-page>
+	
+	<listener>
+    	<listener-class>kr.or.ddit.listener.ContextPathListener</listener-class>
+  	</listener>
 </web-app>
