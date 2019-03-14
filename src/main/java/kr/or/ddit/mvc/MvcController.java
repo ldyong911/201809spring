@@ -28,6 +28,7 @@ import kr.or.ddit.exception.NoFileException;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.validator.UserVoValidator;
 
+@RequestMapping("/mvc")
 @Controller
 public class MvcController {
 	
@@ -40,7 +41,7 @@ public class MvcController {
 	 * @return
 	 * Method 설명 : part를 테스트할 view 요청
 	 */
-	@RequestMapping("/mvc/view")
+	@RequestMapping("/view")
 	public String view(){
 		return "mvc/view";
 	}
@@ -52,7 +53,7 @@ public class MvcController {
 	 * @return
 	 * Method 설명 : fileupload 처리 요청 테스트
 	 */
-	@RequestMapping("/mvc/fileupload")
+	@RequestMapping("/fileupload")
 	public String fileupload(@RequestParam("userId")String userId, 
 							@RequestPart("profile")MultipartFile multipartFile){
 		
@@ -74,7 +75,7 @@ public class MvcController {
 		return "mvc/view";
 	}
 	
-	@RequestMapping("/mvc/textView")
+	@RequestMapping("/textView")
 	public String textView(){
 		return "mvc/textView";
 	}
@@ -82,7 +83,7 @@ public class MvcController {
 	//@RequestParam 어노테이션을 적용하지 않아도
 	//인스턴스명이랑 동일하면 바인딩을 자동으로 해줌
 	//파라미터명이랑 인스턴스 명이랑 다를경우 --> @RequestParam을 사용
-	@RequestMapping("/mvc/textReq2")
+	@RequestMapping("/textReq2")
 	public String textReq2(String userId, String pass, Model model){
 		logger.debug("userId : {}", userId);
 		logger.debug("pass : {}", pass);
@@ -98,7 +99,7 @@ public class MvcController {
 	//반드시 command객체 메소드 인자 뒤에 위치 해야한다
 	// O : UserVo userVo, BindingResult result, Model model
 	// X : UserVo userVo, Model model, BindingResult result
-	@RequestMapping("/mvc/textReq")
+	@RequestMapping("/textReq")
 	public String textReq(UserVo userVo, BindingResult result, Model model){
 		new UserVoValidator().validate(userVo, result);
 		
@@ -113,13 +114,13 @@ public class MvcController {
 		return "mvc/textView";
 	}
 	
-	@RequestMapping("/mvc/textReqJsr303")
+	@RequestMapping("/textReqJsr303")
 	public String textReqJsr303(@Valid UserVo userVo, BindingResult result){
 		logger.debug("has error(jsr303) : {}", result.hasErrors());
 		return "mvc/textView";
 	}
 	
-	@RequestMapping("/mvc/textReqValJsr303")
+	@RequestMapping("/textReqValJsr303")
 	public String textReqValJsr303(@Valid UserVo userVo, BindingResult result){
 		logger.debug("has error(Valjsr303) : {}", result.hasErrors());
 		return "mvc/textView";
@@ -137,7 +138,7 @@ public class MvcController {
 	 * @return
 	 * Method 설명 : arithmetic 예외 강제 발생
 	 */
-	@RequestMapping("/mvc/throwArith")
+	@RequestMapping("/throwArith")
 	public String throwArithmeticException(){
 		if(1==1){ //의미없는 코드로 컴파일러 속이기
 			throw new ArithmeticException();
@@ -145,7 +146,7 @@ public class MvcController {
 		return "mvc/textView";
 	}
 	
-	@RequestMapping("/mvc/throwNoFileException")
+	@RequestMapping("/throwNoFileException")
 	public String throwNoFileException() throws NoFileException{
 		Resource resource = new ClassPathResource("kr/or/ddit/config/spring/no-exsits.xml");
 		
@@ -159,7 +160,7 @@ public class MvcController {
 		return "mvc/textView";
 	}
 	
-	@RequestMapping("/mvc/jsonResponse")
+	@RequestMapping("/jsonResponse")
 	public String jsonResponse(Model model){
 		List<String> list = new ArrayList<String>();
 		list.add("brown");
@@ -173,7 +174,7 @@ public class MvcController {
 		return "jsonView"; //bean 객체의 이름과 동일함
 	}
 	
-	@RequestMapping("/mvc/jsonResponseViewObj")
+	@RequestMapping("/jsonResponseViewObj")
 	public View jsonResponseViewObj(Model model){
 		List<String> list = new ArrayList<String>();
 		list.add("brown");
@@ -188,14 +189,14 @@ public class MvcController {
 		return new MappingJackson2JsonView(); //이렇게도 가능하지만 사용안함
 	}
 	
-	@RequestMapping("/mvc/profileImgView")
+	@RequestMapping("/profileImgView")
 	public String profileImgView(@RequestParam(name="userId", defaultValue="brown")String userId, Model model){
 		model.addAttribute("userId", userId);
 		
 		return "profileImgView"; //bean 객체의 이름과 동일함
 	}
 	
-	@RequestMapping("/mvc/helloTiles")
+	@RequestMapping("/helloTiles")
 	public String helloTiles(){
 		//1.BeanNameViewResolver
 		//	helloTiles()에서 리턴하는 문자열에 해당하는
@@ -208,5 +209,10 @@ public class MvcController {
 		//		있으면 -> 해당 tiles 설정대로(layout extends) 응답 생성
 		//		없으면 -> 다음 view Resolver에서 처리
 		return "helloTiles"; //tiles 설정파일의 definition 이름(name)과 동일함
+	}
+	
+	@RequestMapping("/msgView")
+	public String msgView(){
+		return "mvc/msgView";
 	}
 }

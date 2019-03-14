@@ -29,6 +29,7 @@
 		<property name="basenames">
 			<list>
 				<value>classpath:kr/or/ddit/config/msg/error</value>
+				<value>classpath:kr/or/ddit/config/msg/msg</value>
 			</list>
 		</property>
 	</bean>

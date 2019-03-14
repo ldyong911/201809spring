@@ -69,5 +69,17 @@
 		<property name="maxUploadSizePerFile" value="5242880"/> <!-- 5MB -->
 		<property name="maxUploadSize" value="26214400"/> <!-- 5MB * 5 -->
 	</bean>	 
-
+	
+	<!-- bean 이름 localeResolver로 정해져 있다 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+	
+	<!-- LocaleChangeInterceptor -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="language"></property> <!-- value값은 jsp파일에서 select박스의 name값과 일치하면 Locale 설정을 해줌 -->
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
