@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- @Service, @Repository 어노테이션 적용된 클래스를 스캔 -->
-	
+	<!-- spring bean에 선언된 @Autowired, @Resource, @Inject -->
 	<context:annotation-config/>
 	
 	<!-- @Controller, @Service, @Repository, @Component를 스캔 -->
